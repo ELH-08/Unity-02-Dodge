@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;                //UI관련 Library
-using UnityEngine.SceneManagement;   //Scene 관리 관련 Library
+using UnityEngine.UI;                   //UI관련 Library 호출
+using UnityEngine.SceneManagement;      //Scene 관리 관련 Library 호출
 
 
 
@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public Text recordText;         //최고기록 텍스트
 
     private float surviveTime;      //생존시간
-    private bool isGameover;        //게임오버 상태
+    private bool isGameover;        //게임종료 상태 설정
  
     void Start()  // (3) - (script 활성화시) 1회 호출 / coroutine 가능
     {
@@ -45,17 +45,17 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void EndGame() //게임오버 함수
+    public void EndGame() //게임종료 함수
     {
-        isGameover = true;              //게임오버 상태이면
-        gameoverText.SetActive(true);   //gameoverText 활성화
+        isGameover = true;                                  //게임종료 상태이면
+        gameoverText.SetActive(true);                       //gameoverText 활성화
 
-        float bestTime = PlayerPrefs.GetFloat("BestTime"); //플레이어 설정의 BestTime에 저장된 최고기록 가져오기
+        float bestTime = PlayerPrefs.GetFloat("BestTime");  //플레이어 설정의 BestTime에 저장된 최고기록 가져오기
 
-        if (surviveTime > bestTime) //생존시간>최고기록 이면
+        if (surviveTime > bestTime)                         //생존시간>최고기록 이면
         {
-            bestTime= surviveTime;                      //최고기록에 생존시간 값을 저장
-            PlayerPrefs.SetFloat("BestTime",bestTime);  //변경된 최고기록을 저장
+            bestTime= surviveTime;                          //최고기록에 생존시간 값을 저장
+            PlayerPrefs.SetFloat("BestTime",bestTime);      //변경된 최고기록을 저장
             recordText.text = "Best Time:" + (int)bestTime; //recordText의 text요소에 Best Time : bestTime값 을 표시
 
         }
