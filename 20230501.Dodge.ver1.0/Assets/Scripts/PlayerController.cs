@@ -19,10 +19,10 @@ public class PlayerController : MonoBehaviour
     {
         /*
         // 이동함수        
-        // 1) Input.GetKey() : 키를 하나하나 바꿔서 수정해야하기에 자주 사용 X
-        // 2) Rigidbody의 AddForce() : 누적 힘 추가 -> 방향 전환 늦음
+        // 1) Input.GetKey()는 키 입력값을 하나하나 바꿔서 수정해야하기에 자주 사용 X
+        // 2) rigidbody변수.AddForce() : 물리엔진에 관성 적용. 방향 전환 늦어 자주 사용X
         //
-        if (Input.GetKey(KeyCode.UpArrow) == true)       //↑키를 누르는 동안 true, 그 외엔 false 반환
+        if (Input.GetKey(KeyCode.UpArrow) == true)       //↑키를 누르는 동안(273) true, 그 외엔 false 반환
         {
             playerRigidbody.AddForce(0f,0f,speed);       // z축 방향으로 물리력 추가
         }
@@ -42,15 +42,17 @@ public class PlayerController : MonoBehaviour
 
 
         // 이동함수 
-        float xInput = Input.GetAxis("Horizontal");     // x축 값 = 연속 수평 값 저장
-        float zInput = Input.GetAxis("Vertical");       // y축 값 = 연속 수직 값 저장
+        // 1) rigidbody변수.velocity() : 물리엔진의 현재 속도 (관성 무시, 이전 속도를 지우고 새 속도로 즉시 변경)
+        //
+        float xAxis = Input.GetAxis("Horizontal");     // x축 방향 =  -1 ~ 1  
+        float zAxis = Input.GetAxis("Vertical");       // z축 방향 =  -1 ~ 1   
 
-        float xSpeed = xInput * speed;                  // x축 이동 = x축 값 * 속력
-        float zSpeed = zInput * speed;                  // y축 이동 = y축 값 * 속력 
+        float xSpeed = xAxis * speed;                  // x축 이동속도 = x축 방향 * 속력
+        float zSpeed = zAxis * speed;                  // z축 이동속도 = z축 방향 * 속력 
 
-        Vector3 newVelocity = new Vector3(xSpeed, 0f, zSpeed); // newVelocity에 Vector3 타입의 위 방향 정보 값 저장
-        playerRigidbody.velocity = newVelocity;                // 객체(플레이어)의 물리력 속도를 newVelocity 값으로 할당
-    
+        Vector3 newVelocity = new Vector3(xSpeed, 0f, zSpeed); // newVelocity = Vector3 타입에 (x축 이동속도, 0, z축 이동속도) 저장
+        playerRigidbody.velocity = newVelocity;                // 물리엔진의 현재 속도를 newVelocity 값으로 저장
+
     }
 
 
