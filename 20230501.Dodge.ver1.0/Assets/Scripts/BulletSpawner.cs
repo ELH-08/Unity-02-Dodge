@@ -17,7 +17,7 @@ public class BulletSpawner : MonoBehaviour
     {
         //초깃값 
         timeAfterSpawn = 0;                                      //초깃값 0
-        spawnRate = Random.Range(spawnRateMin, spawnRateMax);    //탄알 생성 주기 = spawnRateMin, spawnRateMax 사이로 설정
+        spawnRate = Random.Range(spawnRateMin, spawnRateMax);    //탄알 생성 주기 랜덤으로 설정
         target = FindObjectOfType<PlayerController>().transform; //target = <> 요소(PlayerController script)를 가진 객체의 위치 저장
    
     }
@@ -33,10 +33,10 @@ public class BulletSpawner : MonoBehaviour
         {
             timeAfterSpawn= 0f;             //timeAfterSpawn = 0으로 리셋
 
-            GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);  //탄알 복제본 생성 (이 스크립트를 가진 객체의 transform.position 위치와 transform.rotation 회전으로 생성)
+            GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);  //탄알 복제본을 이 객체(스포너)의 transform.position 위치와 transform.rotation 회전에서 생성
             bullet.transform.LookAt(target);                                                        //탄알 복제본의 위치가 target을 향하도록
 
-            spawnRate = Random.Range(spawnRateMin, spawnRateMax);   //탄알 생성 주기 초깃값 설정 - start()에서는 1회만 호출, update()에서 매회 반복되기 전 설정해줘야 하므로 마지막에 배치
+            spawnRate = Random.Range(spawnRateMin, spawnRateMax);   //탄알 생성 주기 랜덤으로 설정 - update()에서 매회 반복되기 전 설정
         }
     }
 }
