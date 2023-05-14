@@ -57,10 +57,9 @@ public class PlayerController : MonoBehaviour
 
 
 
-    public void Die()     //캐릭터 사망 함수
+    public void Die()  //사망 함수
     {
- 
-        gameObject.SetActive(false);        //이 스크립트 객체(플레이어)를 비활성화 (inspector에서 네모박스 체크 해제)
+        gameObject.SetActive(false);        //이 script가 달린 객체(플레이어)를 비활성화 (inspector에서 네모박스 체크 해제)
 
         GameManager gameManager = FindObjectOfType<GameManager>();  //Game Manager를 담을 변수 초깃값 설정
         gameManager.EndGame();                                      //Game Manager의 EndGame() 함수 호출
